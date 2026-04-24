@@ -90,6 +90,15 @@ export interface MonthlyReportVars {
   unsubscribeUrl: string
 }
 
+export interface NewsletterVars {
+  subject: string
+  title: string
+  content: string
+  actionUrl: string
+  actionLabel: string
+  unsubscribeUrl: string
+}
+
 export type TemplateVars =
   | WelcomeVars
   | ContributionReminderVars
@@ -99,6 +108,7 @@ export type TemplateVars =
   | WeeklySummaryVars
   | EmailVerificationVars
   | MonthlyReportVars
+  | NewsletterVars
 
 // ── Template names ─────────────────────────────────────────────────────────
 
@@ -111,6 +121,7 @@ export type TemplateName =
   | 'weeklySummary'
   | 'emailVerification'
   | 'monthlyReport'
+  | 'newsletter'
 
 const TEMPLATE_FILES: Record<TemplateName, string> = {
   welcome: 'welcome.mjml',
@@ -121,6 +132,7 @@ const TEMPLATE_FILES: Record<TemplateName, string> = {
   weeklySummary: 'weeklySummary.mjml',
   emailVerification: 'emailVerification.mjml',
   monthlyReport: 'monthlyReport.mjml',
+  newsletter: 'newsletter.mjml',
 }
 
 // In-memory cache of compiled HTML (keyed by template name)

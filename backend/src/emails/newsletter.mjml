@@ -1,0 +1,54 @@
+<mjml>
+  <mj-head>
+    <mj-title>{{subject}}</mj-title>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+    <mj-attributes>
+      <mj-all font-family="Inter, Arial, sans-serif" color="#0f172a" />
+      <mj-text font-size="16px" line-height="1.5" />
+      <mj-button background-color="#2563eb" color="white" font-weight="600" border-radius="8px" />
+      <mj-section padding="20px 0" />
+    </mj-attributes>
+    <mj-style>
+      .link-color { color: #2563eb; text-decoration: none; font-weight: 600; }
+      .footer-text { color: #64748b; font-size: 12px; }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f8fafc">
+    <!-- Header -->
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://ajo.app/logo.png" alt="Ajo Logo" align="center" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Main Content -->
+    <mj-section background-color="#ffffff" border-radius="12px" padding="40px">
+      <mj-column>
+        <mj-text font-size="24px" font-weight="700" color="#1e293b" padding-bottom="20px">
+          {{title}}
+        </mj-text>
+        <mj-text>
+          {{content}}
+        </mj-text>
+        <mj-button href="{{actionUrl}}" padding-top="20px">
+          {{actionLabel}}
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Footer -->
+    <mj-section padding-top="40px">
+      <mj-column>
+        <mj-text align="center" css-class="footer-text">
+          &copy; 2024 Ajo. Decentralized Savings Groups.
+        </mj-text>
+        <mj-text align="center" css-class="footer-text">
+          You are receiving this because you signed up for our newsletter.
+        </mj-text>
+        <mj-text align="center" css-class="footer-text">
+          <a href="{{unsubscribeUrl}}" class="link-color">Unsubscribe</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

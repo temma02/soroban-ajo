@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { useOnboarding } from '@/hooks/useOnboarding'
 import { NotificationProvider } from '@/components/NotificationProvider'
+import { HelpProvider } from '@/contexts/HelpContext'
+import HelpPanel from '@/components/help/HelpPanel'
 
 function OnboardingInitializer() {
   const startOnboardingIfNew = useOnboarding((s) => s.startOnboardingIfNew)
@@ -53,11 +55,19 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
-          <NotificationProvider>
-            <OnboardingInitializer />
-            {children}
-            <Toaster position="top-right" />
-          </NotificationProvider>
+          <HelpProvider>
+            <NotificationProvider>
+              <OnboardingInitializer />
+              {children}
+              <HelpPanel />
+              <Toaster
+                position="top-right"
+                toastOptions={{ duration: 4000 }}
+                containerStyle={{ zIndex: 9999 }}
+                gutter={8}
+              />
+            </NotificationProvider>
+          </HelpProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>

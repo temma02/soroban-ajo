@@ -23,10 +23,16 @@ import { notificationsRouter } from './routes/notifications'
 import { verificationRouter } from './routes/verification'
 import { searchRouter } from './routes/search'
 import { membersRouter } from './routes/members'
+import { marketingRouter } from './routes/marketing'
 // import { gamificationRouter } from './routes/gamification' // Temporarily disabled
 // import { goalsRouter } from './routes/goals' // Temporarily disabled due to type errors
 import { setupSwagger } from './swagger'
-import { apiLimiter, strictLimiter } from './middleware/rateLimiter'
+import {
+  apiLimiter,
+  strictLimiter,
+  publicReadLimiter,
+  analyticsLimiter,
+} from './middleware/rateLimiter'
 import { startWorkers, stopWorkers } from './jobs/jobWorkers'
 import { startScheduler, stopScheduler } from './cron/scheduler'
 import { chatService } from './services/chatService'
@@ -35,7 +41,6 @@ import { adminRouter } from './routes/admin'
 import { versionsRouter } from './routes/versions'
 import { ipBlocklist, ddosProtection } from './middleware/ddosProtection'
 import { requestThrottle } from './middleware/requestThrottle'
-import { publicReadLimiter, analyticsLimiter } from './middleware/rateLimiter'
 import { apiVersionMiddleware } from './middleware/apiVersion'
 
 dotenv.config()
@@ -85,6 +90,7 @@ app.use('/api/notifications', notificationsRouter)
 app.use('/api/verification', verificationRouter)
 app.use('/api/search', searchRouter)
 app.use('/api/members', membersRouter)
+app.use('/api/marketing', marketingRouter)
 // app.use('/api/gamification', gamificationRouter) // Temporarily disabled due to missing auth middleware
 // app.use('/api/goals', goalsRouter) // Temporarily disabled due to type errors
 

@@ -115,6 +115,8 @@ export function createIpLimiter(tier: keyof ThrottleConfig): RequestHandler {
 // Backward-compatible named exports so existing imports in index.ts continue to work
 export const apiLimiter: RequestHandler = createIpLimiter('api');
 export const strictLimiter: RequestHandler = createIpLimiter('auth');
+export const publicReadLimiter: RequestHandler = createIpLimiter('api');
+export const analyticsLimiter: RequestHandler = createIpLimiter('expensive');
 
 /**
  * User Limiter Factory

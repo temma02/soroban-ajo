@@ -817,3 +817,67 @@ model Unsubscribe {
 
   @@index([email])
 }
+
+/// Marketing campaign management
+model MarketingCampaign {
+  id          String   @id @default(cuid())
+  name        String
+  subject     String
+  content     String   @db.Text
+  status      String   @default("DRAFT") // DRAFT, SCHEDULED, SENDING, SENT, FAILED
+  scheduledAt DateTime?
+  sentAt      DateTime?
+  listId      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  metrics     CampaignMetrics?
+  events      CampaignEvent[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// Metrics for a specific marketing campaign
+model CampaignMetrics {
+  id               String @id @default(cuid())
+  campaignId       String @unique
+  deliveredCount   Int    @default(0)
+  openCount        Int    @default(0)
+  clickCount       Int    @default(0)
+  bounceCount      Int    @default(0)
+  unsubscribeCount Int    @default(0)
+
+  campaign MarketingCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+}
+
+/// Individual events for campaign tracking
+model CampaignEvent {
+  id          String   @id @default(cuid())
+  campaignId  String
+  email       String
+  eventType   String   // OPEN, CLICK, BOUNCE, UNSUBSCRIBE
+  metadata    Json?
+  occurredAt  DateTime @default(now())
+
+  campaign MarketingCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([email])
+  @@index([eventType])
+  @@index([occurredAt])
+}
+
+/// Marketing contact management
+model MarketingContact {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  name           String?
+  status         String   @default("SUBSCRIBED") // SUBSCRIBED, UNSUBSCRIBED, CLEANED
+  metadata       Json?
+  subscribedAt   DateTime @default(now())
+  unsubscribedAt DateTime?
+
+  @@index([email])
+  @@index([status])
+}
